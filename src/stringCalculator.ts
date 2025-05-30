@@ -1,3 +1,8 @@
+// export function add(numbers: string): number {
+//   return 0; // placeholder
+// }
+
 export function add(numbers: string): number {
-  return 0; // placeholder
+  if (numbers === "") return 0;
+  return 0; // Placeholder for further logic
 }
