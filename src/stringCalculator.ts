@@ -32,19 +32,44 @@
 //   return numberList.reduce((sum, num) => sum + num, 0);
 // }
 
+// export function add(numbers: string): number {
+//   if (numbers === "") return 0;
+
+//   let delimiter = /,|\n/; // default delimiters
+//   let numberPart = numbers;
+
+//   if (numbers.startsWith("//")) {
+//     const parts = numbers.split("\n");
+//     delimiter = new RegExp(parts[0].slice(2)); // custom delimiter
+//     numberPart = parts[1];
+//   }
+
+//   const numberList = numberPart.split(delimiter).map(num => parseInt(num, 10));
+//   return numberList.reduce((sum, num) => sum + num, 0);
+// }
+
+
 export function add(numbers: string): number {
   if (numbers === "") return 0;
 
-  let delimiter = /,|\n/; // default delimiters
+  let delimiter = /,|\n/;
   let numberPart = numbers;
 
   if (numbers.startsWith("//")) {
     const parts = numbers.split("\n");
-    delimiter = new RegExp(parts[0].slice(2)); // custom delimiter
+    delimiter = new RegExp(parts[0].slice(2));
     numberPart = parts[1];
   }
 
-  const numberList = numberPart.split(delimiter).map(num => parseInt(num, 10));
+  const numberList = numberPart
+    .split(delimiter)
+    .map(num => parseInt(num, 10));
+
+  const negatives = numberList.filter(n => n < 0);
+  if (negatives.length > 0) {
+    throw new Error(`negative numbers not allowed: ${negatives.join(",")}`);
+  }
+
   return numberList.reduce((sum, num) => sum + num, 0);
 }
 
